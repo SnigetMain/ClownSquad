@@ -4,12 +4,13 @@ from Provaider import Provider
 
 class Cooker(Worker):
 
+    def give_order(self, order: Order):
+        self.workerStatus = WorkerStatus.INPROGRESSWORK
+        self.currentWork = order
+
     def order_assembly(self, order: Order,provider:Provider):
-        if(self.workerStatus == WorkerStatus.FREE):
-            self.workerStatus = WorkerStatus.INPROGRESSWORK
-            self.currentWork = order
-            print(f'Работает над заказом ID: {order.orderId}')
-            self.package(provider)
+        print(f'Работает над заказом ID: {order.orderId}')
+        self.package(provider)
         
 
     def package(self,provider:Provider):
