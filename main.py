@@ -7,7 +7,7 @@ class Product:
         self.ingredients = []
         self.energy_value = None
         self.cooking_time = 10 ** 12
-        self.additional = [('Ничего', 10 ** 12), ('negr', 0)]
+        self.additional = [('пїЅпїЅпїЅпїЅпїЅпїЅ', 10 ** 12), ('negr', 0)]
     
     def get_something(self):
         print('get_something')
@@ -63,17 +63,17 @@ class Payment:
         self.bonus = 0
     
     def make_payment(self):
-        print('Выберете способ оплаты')
-        for method in payment_methods:
+        print('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ')
+        for method in self.payment_methods:
             print(method)
         choose_method = input()
-        for method in payment_methods:
+        for method in self.payment_methods:
             if choose_method == method:
                 if self.get_payment_confirm(method):
-                    print('Оплата прошла успешно')
+                    print('пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ')
                 else:
-                    print('Во время оплаты произошла ошибка')
-        print('Такого способа оплаты не существует')
+                    print('пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ')
+        print('пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ')
     
     def get_payment_confirm(self, method):
         if method == 'analom':
@@ -90,7 +90,7 @@ class Client:
         self.payment = Payment()
     
     def choose_facility(self):
-        print('Выберете ресторан: ')
+        print('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: ')
         for facility in Facilities:
             print(facility.name)
         self.cart = Cart()
@@ -99,13 +99,13 @@ class Client:
             if facility.name == name_of_facility:
                 self.cart.facility = facility
                 return
-        print('Ресторана с таким названием не существует')
+        print('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ')
         
     def choose_product(self):
         if self.cart.facility == None:
-            print('Сначала выберете ресторан')
+            print('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ')
             return
-        print('Добавьте продукт в корзину')
+        print('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ')
         for product in Products:
             print(product.name)
         name_of_product = input()
@@ -114,28 +114,28 @@ class Client:
                 cart_product = product
                 self.add_additional(cart_product)
                 return
-        print('Такого продукта не существует')
+        print('пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ')
     
     def add_additonal(self, product):
         while True:
-            print('Выберете дополнение к основному продукту')
+            print('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ')
             for addition in product.additional:
                 print(addition[0], addition[1])
             additional_product = input()
             for addition in product.additional:
                 if addition[0] == additional_product:
-                    print('Дополнение добавлено в корзину.')
+                    print('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.')
                     return 
-            print('Такого дополнения к этому продукту не существует')
+            print('пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ')
         
     def get_payment(self):
         if self.cart.facility == None:
-            print('Сначала выберете ресторан')
+            print('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ')
             return 
-        print('Ресторан:', self.cart.facility.name)
+        print('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:', self.cart.facility.name)
         for product in self.cart.list_products:
             print(product.name)
-        print('Счет:', self.cart.cost)
+        print('пїЅпїЅпїЅпїЅ:', self.cart.cost)
         self.payment.make_payment()
         
         
@@ -143,7 +143,7 @@ class Client:
         print('call_delivery_boy')
     
     def cancel_order(self):
-        print('Вы отменили заказ. Корзина пуста.')
+        print('пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.')
         self.cart = Cart
         
     def make_rate(self):

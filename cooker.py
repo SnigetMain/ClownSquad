@@ -1,22 +1,20 @@
 from worker import Worker, WorkerStatus
-from Order import Order,Status
-from Provaider import Provider
+from order import Order,Status
 
 class Cooker(Worker):
 
-    def order_assembly(self, order: Order,provider:Provider):
-        if(self.workerStatus == WorkerStatus.FREE):
-            self.workerStatus = WorkerStatus.INPROGRESSWORK
-            self.currentWork = order
-            print(f'Работает над заказом ID: {order.orderId}')
-            self.package(provider)
+    def give_order(self, order: Order):
+        self.workerStatus = WorkerStatus.INPROGRESSWORK
+        self.currentWork = order
+
+    def order_assembly(self):
+        print(f'Работает над заказом ID: {self.currentWork.orderId}')
+        self.package()
         
 
-    def package(self,provider:Provider):
+    def package(self):
         self.currentWork.ChangeStatus(Status.INSTOCK)
-        for item in self.currentWork.itemList:
-            provider.warehouse[item]-= 1
         self.currentWork = None
-        print("Упаковал заказ")
+        print("Приготовил заказ")
         self.workerStatus = WorkerStatus.FREE
         

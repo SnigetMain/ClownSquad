@@ -21,7 +21,7 @@ class Order:
     #collector: User
     
 
-    def __init__(self,  status: Status, ProductList: list[Product],  timeCreation: str,adress):
+    def __init__(self,  status: Status, ProductList: list[Product],adress, timeCreation = 0):
         self.orderId = uuid.uuid1()
         self.status = status
         self.ProductList = ProductList
