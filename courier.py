@@ -1,6 +1,9 @@
 from worker import Worker,WorkerStatus
 from order import Order
 from order import Status
+
+Couriers = []
+
 class Courier(Worker):
 
     def give_order(self, order: Order):

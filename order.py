@@ -1,7 +1,9 @@
 from dataclasses import dataclass
 from enum import Enum
 from product import Product
+# from typing import List
 import uuid
+
 class Status(Enum):
     PROCESSING = 0 #обработка
     ACCEPTED = 1  # приянт
@@ -17,11 +19,11 @@ class Order:
     status: Status
     ProductList: list[Product]
     timeCreation: str
-    address:str
+    address: str
     #collector: User
     
 
-    def __init__(self,  status: Status, ProductList: list[Product],adress, timeCreation = 0):
+    def __init__(self,  status: Status=0, ProductList: list[Product]=[], adress="", timeCreation = 0):
         self.orderId = uuid.uuid1()
         self.status = status
         self.ProductList = ProductList

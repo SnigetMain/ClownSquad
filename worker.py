@@ -1,4 +1,4 @@
-from Order import Order
+from order import Order
 from enum import Enum
 
 class WorkerStatus(Enum):
