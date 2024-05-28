@@ -4,6 +4,7 @@ from courier import Courier, Couriers
 from order import Order
 from facility import Facility, Facilities
 from product import Product
+from Review_and_Stock import Review, Reviews
 
 Clients = []
     
@@ -117,7 +118,16 @@ class Client:
         self.cart.clear_cart()
         
     def make_rate(self):
-        print('make_rate')
+        review = Review()
+        print('Опишите ваше мнение о заказе')
+        review.text = input()
+        print('Дайте оценку заказа от 1 до 10')
+        review.rate = int(input())
+        print('Опишите плюсы заказа')
+        review.plus = input()
+        print('Опишите минусы заказа')
+        review.minus = input()
+        Reviews.append(review)
     
     def __str__(self):
         return "name: {}, phone_number: {}, bonus: {}".format( \
