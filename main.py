@@ -7,7 +7,7 @@ from facility import Facilities, add_facility, Facility
 from order import Order, Status
 from payment import Payment
 
-client = Clients[0]
+client = Clients[0]    
 
 def command_pack():
     client.choose_facility()
