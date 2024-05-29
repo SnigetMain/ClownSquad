@@ -92,24 +92,12 @@ class Client:
         self.get_payment()
         
     def get_payment(self):
-        cost = 0
         if self.cart.facility == None:
             print('Сначала выберете ресторан')
             return 
         print('Ресторан:', self.cart.facility.name)
         print('Название | Цена')
-        for product in self.cart.list_products:
-            print(product.name, '|', product.price)
-            cost += product.price
-        if self.cart.additional_dict:
-            print('Допы: ')
-            print(self.cart.additional_dict.keys())
-            for product_name in self.cart.additional_dict.keys():
-                print('Название | Цена')
-                for dop in self.cart.additional_dict[product_name]:
-                    print(dop[0], dop[1])
-                    cost += dop[1]
-        print('Счет:', cost)
+        print('Счет:', self.cart.count_cost_cart())
         self.payment.make_payment()
         self.cart = Cart()
         
