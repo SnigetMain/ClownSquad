@@ -40,10 +40,13 @@ class Client:
         for product in self.cart.facility.menu:
             print(product.name)
         name_of_product = input()
+        count_product = input('Введите кол-во продуктов')
         for product in self.cart.facility.menu:
             if product.name == name_of_product:
                 cart_product = product
                 self.cart.add_to_cart(cart_product)
+                if count_product > 1:
+                    self.cart.set_product_count(cart_product, count_product - 1)
                 for addition in product.additional:
                     print(addition[0], addition[1])
                 print('Нужны ли дополнения к продукту? (y / n)')
