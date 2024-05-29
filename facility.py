@@ -17,6 +17,7 @@ class Facility:
         self.menu=[]
         self.list_cookers=[]
         self.workig_hours = (start_time, end_time)
+        self.position = tuple((random.uniform(-10000, 10000), random.randint(-10000, 10000)))
 
     def add_dish(self):
         dish_name=input('Введите название блюда: ')
