@@ -38,7 +38,12 @@ class Cart:
     def count_cost_cart(self): #подсчитать стоимость корзины
         for i in range(len(self.list_products)):
             self.order_amount += self.list_products[i][0].price * self.list_products[i][1]
-            return self.order_amount
+
+        for product_name in self.additional_dict.keys():
+            for dop in self.additional_dict[product_name]:
+                self.order_amount += dop[1]
+
+        return self.order_amount
 
     def confirm_cart(self): #подтвердить
         self.is_confirmed = True
