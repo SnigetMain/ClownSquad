@@ -17,6 +17,7 @@ class Client:
         self.cart = cart
         self.bonus = bonus
         self.payment = Payment()
+        self.position = tuple((random.uniform(-10000, 10000), random.randint(-10000, 10000)))
         Clients.append(self)
     
     def choose_facility(self):
@@ -124,8 +125,8 @@ class Client:
         return "name: {}, phone_number: {}, bonus: {}".format( \
             self.name, self.phone_number, self.bonus)
 
-def add_client(name="Noname", phone_number=0, \
+    def add_client(name="Noname", phone_number=0, \
                  cart=Cart(), bonus=0):
-    Clients.append(Client(name=name, 
+        Clients.append(Client(name=name, 
                    phone_number=phone_number, cart=Cart(), bonus=bonus))
 add_client('Olegator')
