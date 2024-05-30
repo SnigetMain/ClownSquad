@@ -4,6 +4,13 @@ from order import Status
 
 Couriers = []
 
+class CourierTransport(Enum):
+    FEET = 5
+    BICYCLE = 15
+    MONOWHEEL = 20
+    ELECTRICSCOOTER = 25
+    CAR = 50
+
 class Courier(Worker):
 
     def give_order(self, order: Order):
