@@ -25,14 +25,14 @@ class Facility:
     def add_dish(self):
         dish_name=input('Введите название блюда: ')
         dish_price=int(input('Введите цену блюда: '))
-        dish_ingridients = map(str, input('Введите ингридиенты через пробел: ').split(' '))
+        dish_ingridients = list(map(str, input('Введите ингридиенты через пробел: ').split(' ')))
         dish_additional=[]
         dish_energy=input('Введите энергетическую ценность блюда: ')
         count_of_aditional=int(input('Сколько допов для блюда? '))
         for i in range(count_of_aditional):
             a=input('Введите название допа: ')
             b=int(input('Введите цену допа: '))
-            dish_additional.append((a,b))
+            dish_additional.append([a,b])
         dish_time=int(input('Введите время приготовления: '))
         new_dish=Product(dish_name,dish_price,dish_ingridients, dish_additional,dish_energy,dish_time)
         self.menu.append(new_dish)
