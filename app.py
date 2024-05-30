@@ -42,10 +42,8 @@ class App:
             print(f'У вас не хватает руб')
 
     def addFacility(self):
-        timeStart = input('Введите время открытия: ')
-        endTime = input('Введите время закрытия: ')
         name = input('Введите название: ')
-        newFacilty = Facility(timeStart,endTime,name)
+        newFacilty = Facility(name)
         self.listFacility.append(newFacilty)
         return newFacilty
     

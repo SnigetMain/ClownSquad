@@ -14,13 +14,12 @@ class Facility:
     listReview:list[Review]
     menu: list[Product]
 
-    def __init__(self, start_time=(0, 0), end_time=(23, 59), name=''):
+    def __init__(self, name=''):
         self.listReview = list()
         self.name = name
         self.list_orders = []
         self.menu=[]
         self.list_cookers=[]
-        self.workig_hours = (start_time, end_time)
         self.position = tuple((random.uniform(-10000, 10000), random.randint(-10000, 10000)))
 
     def add_dish(self):
@@ -78,14 +77,3 @@ class Facility:
 
 def add_facility(start_time=(0, 0), end_time=(23, 59), name=''):
     Facilities.append(Facility(start_time, end_time, name))
-
-add_facility(name='MacDac')
-Facilities[0].menu = [
-    Product('Burger', 100, ['bulka', 'cotleta', 'trava', 'bulka'], [
-        ('negr', 10), ('ketchup', 20), ('mayo', 20) ], 200, 300),
-    Product('FriedPotato', 400, ['potato', 'fire', 'another_potato'], [
-        ('negr', 10), ('ketchup', 20), ('mayo', 20) ], 500, 600),
-    Product('Coke', 400, ['smoke', 'wire', 'every', 'day'], [
-        ('negr', 10), ('zona', 1000000000000), ('mayo', 20) ], 500, 600),    
-]
-
