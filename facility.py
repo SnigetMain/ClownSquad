@@ -4,7 +4,7 @@ from cooker import Cooker
 from courier import Courier
 from worker import WorkerStatus
 from Review_and_Stock import Review
-
+import random
 Facilities = []
 
 class Facility:
@@ -12,6 +12,7 @@ class Facility:
     list_cookers: list[Cooker]
     list_orders: list[Order]
     listReview:list[Review]
+    menu: list[Product]
 
     def __init__(self, start_time=(0, 0), end_time=(23, 59), name=''):
         self.listReview = list()
@@ -26,9 +27,8 @@ class Facility:
         dish_name=input('Введите название блюда: ')
         dish_price=int(input('Введите цену блюда: '))
         dish_ingridients = map(str, input('Введите ингридиенты через пробел: ').split(' '))
-        dish_additional=[()]
+        dish_additional=[]
         dish_energy=input('Введите энергетическую ценность блюда: ')
-        dish_price=input('Введите время приготовления блюда: ')
         count_of_aditional=int(input('Сколько допов для блюда? '))
         for i in range(count_of_aditional):
             a=input('Введите название допа: ')

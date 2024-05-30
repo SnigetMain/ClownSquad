@@ -1,8 +1,4 @@
-from payment import Payment
-from cart import Cart
-from courier import Courier, Couriers
-from order import Order
-from facility import Facility, Facilities
+#from facility import Facility, Facilities
 from product import Product
 
 Reviews = []
@@ -47,17 +43,17 @@ class Review:
                 break
 
 class Stock:
-    facility:Facility
+    facilityName:str
     product:Product
     discount:int
     description:str
     
-    def __init__(self, facility,product, discount, description, condition):
+    def __init__(self, facilityName,product, discount, description, condition):
         self.product = product
         self.discount = discount
         self.description = description
         self.condition = condition
-        self.facility = facility
+        self.facilityName = facilityName
 
     def stock_using(self, cart):
         if(self.condition(cart)):

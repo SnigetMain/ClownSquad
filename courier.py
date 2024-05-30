@@ -11,7 +11,7 @@ class Courier(Worker):
 
     def take_order(self):
   
-        self.currentWork.ChangeStatus(Status.ONTHEWAY)
+        self.currentWork == Status.ONTHEWAY
         print(f'Доставляет заказ по адресу {self.currentWork.address}')
         self.giveOrder()
 

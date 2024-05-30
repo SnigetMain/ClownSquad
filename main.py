@@ -1,11 +1,7 @@
-from datetime import datetime, date, time
-from client import Client, Clients, add_client
-from cart import Cart
-from cooker import Cooker
-from courier import Courier
-from facility import Facilities, add_facility, Facility
-from order import Order, Status
-from payment import Payment
+from appInterface import AppInterface
+from app import App
+name = input('Введите название приложения ')
+app = App(name)
+AppInterface(app)
 
 
-while(true)

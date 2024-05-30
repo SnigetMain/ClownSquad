@@ -49,8 +49,12 @@ class Cart:
         if(self.facility != None):
             print(f'Заведение {self.facility.name}')
             for product in self.list_products:
-                print(f'Продукт {product[0]}, количество {product[1]}')
+                print(f'Продукт {product[0].name}, количество {product[1]}')
 
     def confirm_cart(self): #подтвердить
         self.is_confirmed = True
 
+    def returnCountofProduct(self,product):
+        for products in self.list_products:
+            if(products[0].name == product.name):
+                return products[1]

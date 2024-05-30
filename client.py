@@ -1,7 +1,7 @@
 from payment import Payment
 from cart import Cart
-from courier import Courier, Couriers
-from order import Order
+from courier import Courier
+from order import Order,Status
 from facility import Facility, Facilities
 from product import Product
 from Review_and_Stock import Review, Reviews
@@ -33,7 +33,7 @@ class Client:
         for facility in Facilities:
             if facility.name == name_of_facility:
                 self.cart.facility = facility
-                self.choose_product()
+                self.choose_product(facility)
                 return
         print('Ресторана с таким названием не существует')
         
@@ -45,7 +45,7 @@ class Client:
         for product in self.cart.facility.menu:
             print(product.name)
         name_of_product = input()
-        count_product = input('Введите кол-во продуктов')
+        count_product = int(input('Введите кол-во продуктов '))
         for product in self.cart.facility.menu:
             if product.name == name_of_product:
                 cart_product = product
@@ -73,7 +73,7 @@ class Client:
             additional_product = input()
             for addition in product.additional:
                 if addition[0] == additional_product:
-                    self.cart.add_addition(product.name, addition)
+                    self.cart.add_addition(product, addition)
                     print('Дополнение добавлено в корзину')
                     return 
             print('Такого дополнения к этому продукту не существует')
@@ -108,25 +108,27 @@ class Client:
         print('Ресторан:', self.cart.facility.name)
         print('Название | Цена')
         print('Счет:', cost)
-        self.payment.make_payment()
+        flag = self.payment.make_payment()
         self.cart = Cart()
+        return flag
     
     def cancel_order(self):
         print('Вы отменили заказ. Корзина пуста.')
         self.cart.clear_cart()
         
     def make_rate(self):
-        review = Review()
+
         print('Опишите ваше мнение о заказе')
-        review.text = input()
-        if(review.text == ''):
+        text = input()
+        if(text == ''):
             return None
         print('Дайте оценку заказа от 1 до 10')
-        review.rate = int(input())
+        rate = int(input())
         print('Опишите плюсы заказа')
-        review.plus = input()
+        plus = input()
         print('Опишите минусы заказа')
-        review.minus = input()
+        minus = input()
+        review = Review(self.name,text,rate,plus,minus)
         return review
     
     def __str__(self):
@@ -137,4 +139,6 @@ class Client:
                  cart=Cart(), bonus=0):
         Clients.append(Client(name=name, 
                    phone_number=phone_number, cart=Cart(), bonus=bonus))
-add_client('Olegator')
+
+    def TakeOrder(self,order:Order):
+        order.status = Status.RECEIVED

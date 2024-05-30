@@ -20,7 +20,7 @@ class Worker:
         self.workerStatus = WorkerStatus.NOTWORKING
         self.workDuration = min(6,workDuration)
 
-    def get_shift(self, timeStartWork: int):
+    def get_shift(self, timeStartWork: int = 0):
         self.workerStatus = WorkerStatus.FREE
         self.timeStartWork = timeStartWork
         self.timeEndWork = (timeStartWork + self.workDuration) % 24

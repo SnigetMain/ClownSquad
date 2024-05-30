@@ -2,15 +2,10 @@ from dataclasses import dataclass
 from enum import Enum
 from product import Product
 # from typing import List
-from client import Client
-from facility import Facility
+#from client import Client
+#from facility import Facility
 import uuid
 
-from dataclasses import dataclass
-from enum import Enum
-from product import Product
-# from typing import List
-import uuid
 
 
 class Status(Enum):
@@ -29,18 +24,18 @@ class Order:
     ProductList: list[Product]
     timeCreation: tuple[int]
     address: str
-    client: Client
-    facility: Facility
+    clientName: str
+    facilityName: str
     #collector: User
     
 
     # collector: User
 
-    def __init__(self,client:Facility,facility:Facility, status: Status = Status.PROCESSING, ProductList: list[Product] = [], adress="", timeCreation=0):
+    def __init__(self,clientName:str,facilityName:str, status: Status = Status.PROCESSING, ProductList: list[Product] = [], adress="", timeCreation=0):
         self.orderId = uuid.uuid1()
-        self.client = client
+        self.clientName = clientName
         self.status = status
-        self.facility = facility
+        self.facilityName = facilityName
         self.ProductList = ProductList
         self.timeCreation = timeCreation
         self.address = adress
@@ -51,7 +46,7 @@ class Order:
 
     def printOrder(self):
         print(f'ID: {self.orderId}')
-        print(f'Кому: {self.client.name}')
+        print(f'Кому: {self.clientName}')
         print(f'Статус заказа: {self.status.name}')
         if(self.status == Status.INSTOCK):
             print(f'Время готовки {self.count_product_time()}')
@@ -67,7 +62,7 @@ class Order:
     # расчитать время доставки продуктов курьером
     def count_courier_time(self, facility_position: tuple = (0, 0), client_position: tuple = (0, 0), courier_speed = 5):
         #Расстояние через евклидову метрику
-        distance = ((self.facility.position[0] - self.client.position[0]) ** 2) + ((self.facility.position[1] - self.client.position[1]) ** 2) ** 0.5
+        distance = ((self.client.position[0]) ** 2) + ((self.client.position[1]) ** 2) ** 0.5
         return (distance / courier_speed * 60)
 
     

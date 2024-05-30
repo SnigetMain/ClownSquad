@@ -13,7 +13,7 @@ class Cooker(Worker):
         
 
     def package(self):
-        self.currentWork.ChangeStatus(Status.INSTOCK)
+        self.currentWork.status = Status.INSTOCK
         self.currentWork = None
         print("Приготовил заказ")
         self.workerStatus = WorkerStatus.FREE
