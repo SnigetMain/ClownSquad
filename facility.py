@@ -24,19 +24,16 @@ class Facility:
 
     def add_dish(self):
         dish_name=input('Введите название блюда: ')
-<<<<<<< HEAD
         while True:
             try:
                 dish_price = int(input('Введите цену блюда: '))
                 break
             except Exception:
                 print('Некорректный ввод')
-=======
-        dish_price=int(input('Введите цену блюда: '))
->>>>>>> 0acda20bab3ca5d2bc3e5eb556c73f764d1b4195
         dish_ingridients = list(map(str, input('Введите ингридиенты через пробел: ').split(' ')))
         dish_additional=[]
         dish_energy=int(input('Введите энергетическую ценность блюда: '))
+        dish_time=int(input('Введите время приготовления: '))
         while True:
             try:
                 count_of_aditional=int(input('Сколько допов для блюда? '))
@@ -45,7 +42,6 @@ class Facility:
                 print('Некорректный ввод данных. Повторите ввод')
         for i in range(count_of_aditional):
             a=input('Введите название допа: ')
-<<<<<<< HEAD
             while True:
                 try:
                     b=int(input('Введите цену допа: '))
@@ -53,17 +49,14 @@ class Facility:
                 except:
                     print('Некорректный ввод данных. Повторите ввод')            
             dish_additional.append((a,b))
-        while True:
-            try:
-                dish_time=int(input('Введите время приготовления: '))
-                break
-            except:
-                print('Некорректный ввод данных. Повторите ввод')                    
-=======
-            b=int(input('Введите цену допа: '))
-            dish_additional.append([a,b])
-        dish_time=int(input('Введите время приготовления: '))
->>>>>>> 0acda20bab3ca5d2bc3e5eb556c73f764d1b4195
+            while True:
+                try:
+                    dish_time=int(input('Введите время приготовления: '))
+                    break
+                except:
+                    print('Некорректный ввод данных. Повторите ввод')                    
+                b=int(input('Введите цену допа: '))
+                dish_additional.append([a,b])
         new_dish=Product(dish_name,dish_price,dish_ingridients, dish_additional,dish_energy,dish_time)
         self.menu.append(new_dish)
 
