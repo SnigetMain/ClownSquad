@@ -28,12 +28,19 @@ class Cart:
         self.list_products = []
         self.additional_dict = {}
 
-    def pop_product(self, product_name): #удалить продукт из корзины
+    def pop_product(self): #удалить продукт из корзины
+        print('Введите название товара, который хотите убрать из корзины: ',
+              end="")
+        product_name = input()
+        if product_name not in self.list_products:
+            print('Такого продукта в корзине нет')
+            return
         for i in range(len(self.list_products)):
             if self.list_products[i] == product_name:
                 self.list_products.pop(i)
                 break
         self.additional_dict.pop(product_name)
+        print('Продукт успешно удален из корзины')
 
     def count_cost_cart(self): #подсчитать стоимость корзины
         for i in range(len(self.list_products)):
@@ -46,10 +53,15 @@ class Cart:
         return self.order_amount
 
     def printCart(self):
-        if(self.facility != None):
+        if (self.facility != None):
             print(f'Заведение {self.facility.name}')
             for product in self.list_products:
                 print(f'Продукт {product[0].name}, количество {product[1]}')
+                if product[0].name in self.additional_dict:
+                    print('Допы:')
+                    for add in self.additional_dict[product[0].name]:
+                        print('Название: {}'.format(add))
+            
 
     def confirm_cart(self): #подтвердить
         self.is_confirmed = True

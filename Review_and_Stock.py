@@ -34,7 +34,13 @@ class Review:
         index = 0
         while index != len(self.comments) and index >= 0:
             print(self.comments[index][0], '\n', self.comments[index][0])
-            n = input('Введите 1, если хотите перейти к предыдущему, 2 - если к следующему, 3 - если хотите закрыть')
+            while True:
+                try:
+                    n = int(input('Введите 1, если хотите перейти к предыдущему, 2 - если к следующему, 3 - если хотите закрыть'))
+                    break
+                except Exception:
+                    print('Некорректный ввод данных.')
+                    
             if n == 1:
                 index -= 1
             elif n == 2:

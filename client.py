@@ -1,14 +1,13 @@
 from payment import Payment
 from cart import Cart
 from courier import Courier
-from order import Order,Status
+from order import Order, Status
 from facility import Facility, Facilities
 from product import Product
 from Review_and_Stock import Review, Reviews
 import random
 
-Clients = []
-    
+Clients = []    
 
 class Client:
     def __init__(self, name="Noname",address:str = 'None', phone_number=0, \
@@ -45,13 +44,20 @@ class Client:
         for product in self.cart.facility.menu:
             print(product.name)
         name_of_product = input()
+        flag = False
+        for product in self.cart.facility.menu:
+            if product.name == name_of_product:
+                flag = True
+        if not flag:
+            print('Такого продукта не существует')
+            return
         count_product = int(input('Введите кол-во продуктов '))
         for product in self.cart.facility.menu:
             if product.name == name_of_product:
                 cart_product = product
                 self.cart.add_to_cart(cart_product)
-                if count_product > 1:
-                    self.cart.set_product_count(cart_product, count_product - 1)
+                self.cart.set_product_count(cart_product, count_product)
+                print('Дополнения к основному блюду:')
                 for addition in product.additional:
                     print(addition[0], addition[1])
                 print('Нужны ли дополнения к продукту? (y / n)')
@@ -59,7 +65,12 @@ class Client:
                 if verdict == 'n':
                     return 
                 print('Солько нужно дополнений?')
-                cnt = int(input())
+                while True:
+                    try:
+                        cnt = int(input())
+                        break
+                    except Exception:
+                        print('Некорректный ввод данных. Повторите ввод, пожалуйста.')                        
                 for i in range(cnt):
                     self.add_additional(cart_product)
                 return
@@ -81,21 +92,6 @@ class Client:
 
 
     def confirm_order(self):
-        # order = Order()
-        # print('Введите адрес, куда привезти негров(зачеркнуто) заказ')
-        # order.address = input()
-        # for product in self.cart.list_products:
-        #     order.ProductList.append(product)
-        # for additional_key in self.cart.additional_dict:
-        #     # print(additional)
-        #     for addition in self.cart.additional_dict[additional_key]:
-        #         add_product = Product()
-        #         add_product.name = addition[0]
-        #         add_product.price = addition[1]
-        #         order.ProductList.append(add_product)
-        # # print([(elem.name, elem.price) for elem in order.ProductList])
-        # self.cart.facility.add_order(order)
-        # self.call_delivery_boy()
         self.get_payment()
 
     def changeAdress(self,adress:str):
@@ -123,7 +119,12 @@ class Client:
         if(text == ''):
             return None
         print('Дайте оценку заказа от 1 до 10')
-        rate = int(input())
+        while True:
+            try:
+                rate = int(input())
+                break
+            except Exception:
+                print('Некорректный ввод данных. Повторите ввод, пожалуйста.')           
         print('Опишите плюсы заказа')
         plus = input()
         print('Опишите минусы заказа')

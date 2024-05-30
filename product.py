@@ -11,9 +11,13 @@ class Product:
         self.additional = additional
 
     def printProduct(self):
-        print(self.price)
-        print(self.name)
-        print(self.ingredients)
-        print(self.energy_value)
-        print(self.cooking_time)
-        print(self.additional)
+        print('Цена:', self.price)
+        print("Название продукта:", self.name)
+        print("Ингредиенты:")
+        for ingr in self.ingredients:
+            print(ingr)
+        print("Энергетическая ценность:", self.energy_value)
+        print("Время приготовления:", self.cooking_time)
+        print("Допы:")
+        for add in self.additional:
+            print(add)

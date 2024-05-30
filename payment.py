@@ -2,7 +2,7 @@ from Patterns import Singleton
 
 class Payment(Singleton):
     def __init__(self):
-        self.payment_methods = ['nalom', 'analom', 'bank_card']
+        self.payment_methods = ['nalom', 'analom', 'Банковской картой']
         self.payment_amount = 0
         self.bonus = 0
     

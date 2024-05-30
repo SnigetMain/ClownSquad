@@ -24,16 +24,36 @@ class Facility:
 
     def add_dish(self):
         dish_name=input('Введите название блюда: ')
-        dish_price=int(input('Введите цену блюда: '))
-        dish_ingridients = map(str, input('Введите ингридиенты через пробел: ').split(' '))
+        while True:
+            try:
+                dish_price = int(input('Введите цену блюда: '))
+                break
+            except Exception:
+                print('Некорректный ввод')
+        dish_ingridients = list(map(str, input('Введите ингридиенты через пробел: ').split(' ')))
         dish_additional=[]
-        dish_energy=input('Введите энергетическую ценность блюда: ')
-        count_of_aditional=int(input('Сколько допов для блюда? '))
+        dish_energy=int(input('Введите энергетическую ценность блюда: '))
+        while True:
+            try:
+                count_of_aditional=int(input('Сколько допов для блюда? '))
+                break
+            except:
+                print('Некорректный ввод данных. Повторите ввод')
         for i in range(count_of_aditional):
             a=input('Введите название допа: ')
-            b=int(input('Введите цену допа: '))
+            while True:
+                try:
+                    b=int(input('Введите цену допа: '))
+                    break
+                except:
+                    print('Некорректный ввод данных. Повторите ввод')            
             dish_additional.append((a,b))
-        dish_time=int(input('Введите время приготовления: '))
+        while True:
+            try:
+                dish_time=int(input('Введите время приготовления: '))
+                break
+            except:
+                print('Некорректный ввод данных. Повторите ввод')                    
         new_dish=Product(dish_name,dish_price,dish_ingridients, dish_additional,dish_energy,dish_time)
         self.menu.append(new_dish)
 
@@ -42,6 +62,7 @@ class Facility:
         self.list_orders.append(new_order)
         
     def add_cooker(self):
+        print('Повар был добавлен')
         new_cooker=Cooker(6)
         new_cooker.get_shift(0)
         self.list_cookers.append(new_cooker)
