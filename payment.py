@@ -15,11 +15,12 @@ class Payment(Singleton):
             if choose_method == method:
                 if self.get_payment_confirm(method):
                     print('Оплата прошла успешно')
-                    return
+                    return True
                 else:
                     print('Во время оплаты произошла ошибка')
-                    return
+                    return False
         print('Такого способа оплаты не существует')
+        return False
     
     def get_payment_confirm(self, method):
         if method == 'analom':

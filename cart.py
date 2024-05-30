@@ -45,6 +45,12 @@ class Cart:
 
         return self.order_amount
 
+    def printCart(self):
+        if(self.facility != None):
+            print(f'Заведение {self.facility.name}')
+            for product in self.list_products:
+                print(f'Продукт {product[0]}, количество {product[1]}')
+
     def confirm_cart(self): #подтвердить
         self.is_confirmed = True
 

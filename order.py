@@ -2,6 +2,8 @@ from dataclasses import dataclass
 from enum import Enum
 from product import Product
 # from typing import List
+from client import Client
+from facility import Facility
 import uuid
 
 class Status(Enum):
@@ -18,14 +20,18 @@ class Order:
     orderId: str
     status: Status
     ProductList: list[Product]
-    timeCreation: str
+    timeCreation: tuple[int]
     address: str
+    client: Client
+    facility: Facility
     #collector: User
     
 
-    def __init__(self,  status: Status=0, ProductList: list[Product]=[], adress="", timeCreation = 0):
+    def __init__(self,  client:Client,facilty:Facility,status: Status=Status.PROCESSING, ProductList: list[Product]=[], adress="", timeCreation = (0,0)):
         self.orderId = uuid.uuid1()
+        self.client = client
         self.status = status
+        self.facility = facilty
         self.ProductList = ProductList
         self.timeCreation = timeCreation
         self.address = adress
@@ -33,3 +39,8 @@ class Order:
 
     def ChangeStatus(self,status:Status):
         self.status = status
+
+    def printOrder(self):
+        print(f'ID: {self.orderId}')
+        print(f'Кому: {self.client.name}')
+        print(f'Статус заказа: {self.status.name}')

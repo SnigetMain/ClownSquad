@@ -18,7 +18,7 @@ class Courier(Worker):
 
     def giveOrder(self):
         self.currentWork.status = Status.INPOINT
-        self.workerStatus = WorkerStatus.FREE
+        self.workerStatus = WorkerStatus.NOTWORKING
         print(f'Курьер ДОставил заказ по адресу {self.currentWork.address}')
         self.currentWork = None 
 

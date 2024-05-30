@@ -32,6 +32,7 @@ class Review:
         print(self.minus)
         print('Комеентарии: ')
         print(self.text)
+        self.comments_output()
 
     def comments_output(self):
         index = 0
@@ -46,18 +47,21 @@ class Review:
                 break
 
 class Stock:
+    facility:Facility
     product:Product
-    discount:float
+    discount:int
     description:str
     
-    def __init__(self, product, discount, description, condition):
+    def __init__(self, facility,product, discount, description, condition):
         self.product = product
         self.discount = discount
         self.description = description
         self.condition = condition
+        self.facility = facility
 
     def stock_using(self, cart):
         if(self.condition(cart)):
             return self.discount
         else:
-            print('Условия не соблюдены!')
+            #print('Условия не соблюдены!')
+            return 0

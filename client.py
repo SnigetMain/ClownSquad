@@ -5,22 +5,26 @@ from order import Order
 from facility import Facility, Facilities
 from product import Product
 from Review_and_Stock import Review, Reviews
+import random
 
 Clients = []
     
 
 class Client:
-    def __init__(self, name="Noname", phone_number=0, \
+    def __init__(self, name="Noname",address:str = 'None', phone_number=0, \
                  cart=Cart(), bonus=0):
         self.name = name
         self.phone_number = phone_number
         self.cart = cart
         self.bonus = bonus
+        #
+        self.adress = address
+        #
         self.payment = Payment()
         self.position = tuple((random.uniform(-10000, 10000), random.randint(-10000, 10000)))
         Clients.append(self)
     
-    def choose_facility(self):
+    def choose_facility(self,Facilities:list[Facility]):
         print('Выберете ресторан: ')
         for facility in Facilities:
             print(facility.name)
@@ -33,7 +37,7 @@ class Client:
                 return
         print('Ресторана с таким названием не существует')
         
-    def choose_product(self):
+    def choose_product(self,facility:Facility):
         if self.cart.facility == None:
             print('Сначала выберете ресторан')
             return
@@ -74,36 +78,38 @@ class Client:
                     return 
             print('Такого дополнения к этому продукту не существует')
     
+
+
     def confirm_order(self):
-        order = Order()
-        print('Введите адрес, куда привезти негров(зачеркнуто) заказ')
-        order.address = input()
-        for product in self.cart.list_products:
-            order.ProductList.append(product)
-        for additional_key in self.cart.additional_dict:
-            # print(additional)
-            for addition in self.cart.additional_dict[additional_key]:
-                add_product = Product()
-                add_product.name = addition[0]
-                add_product.price = addition[1]
-                order.ProductList.append(add_product)
-        # print([(elem.name, elem.price) for elem in order.ProductList])
-        self.cart.facility.add_order(order)
-        self.call_delivery_boy()
+        # order = Order()
+        # print('Введите адрес, куда привезти негров(зачеркнуто) заказ')
+        # order.address = input()
+        # for product in self.cart.list_products:
+        #     order.ProductList.append(product)
+        # for additional_key in self.cart.additional_dict:
+        #     # print(additional)
+        #     for addition in self.cart.additional_dict[additional_key]:
+        #         add_product = Product()
+        #         add_product.name = addition[0]
+        #         add_product.price = addition[1]
+        #         order.ProductList.append(add_product)
+        # # print([(elem.name, elem.price) for elem in order.ProductList])
+        # self.cart.facility.add_order(order)
+        # self.call_delivery_boy()
         self.get_payment()
-        
-    def get_payment(self):
+
+    def changeAdress(self,adress:str):
+        self.adress = adress
+
+    def get_payment(self,cost):
         if self.cart.facility == None:
             print('Сначала выберете ресторан')
             return 
         print('Ресторан:', self.cart.facility.name)
         print('Название | Цена')
-        print('Счет:', self.cart.count_cost_cart())
+        print('Счет:', cost)
         self.payment.make_payment()
         self.cart = Cart()
-        
-    def call_delivery_boy(self):
-        self.cart.facility.give_order(Couriers)
     
     def cancel_order(self):
         print('Вы отменили заказ. Корзина пуста.')
@@ -113,13 +119,15 @@ class Client:
         review = Review()
         print('Опишите ваше мнение о заказе')
         review.text = input()
+        if(review.text == ''):
+            return None
         print('Дайте оценку заказа от 1 до 10')
         review.rate = int(input())
         print('Опишите плюсы заказа')
         review.plus = input()
         print('Опишите минусы заказа')
         review.minus = input()
-        Reviews.append(review)
+        return review
     
     def __str__(self):
         return "name: {}, phone_number: {}, bonus: {}".format( \

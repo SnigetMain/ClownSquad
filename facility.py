@@ -3,6 +3,7 @@ from order import Order, Status
 from cooker import Cooker
 from courier import Courier
 from worker import WorkerStatus
+from Review_and_Stock import Review
 
 Facilities = []
 
@@ -10,8 +11,10 @@ class Facility:
 
     list_cookers: list[Cooker]
     list_orders: list[Order]
+    listReview:list[Review]
 
     def __init__(self, start_time=(0, 0), end_time=(23, 59), name=''):
+        self.listReview = list()
         self.name = name
         self.list_orders = []
         self.menu=[]
@@ -62,6 +65,16 @@ class Facility:
                     if courier.workerStatus==WorkerStatus.FREE:
                         courier.give_order(order)
                         self.list_orders.remove(order)
+                        break
+    
+    def printReview(self):
+        for review in self.listReview:
+            review.print_review()
+            print(f'Следущий отзыв или нет y/n')
+            otv = input()
+            if(otv == 'n'):
+                return
+        print('Отзывы закончились')
 
 def add_facility(start_time=(0, 0), end_time=(23, 59), name=''):
     Facilities.append(Facility(start_time, end_time, name))
