@@ -36,11 +36,11 @@ class Order:
 
     # collector: User
 
-    def __init__(self, status: Status = 0, ProductList: list[Product] = [], adress="", timeCreation=0):
+    def __init__(self,client:Facility,facility:Facility, status: Status = Status.PROCESSING, ProductList: list[Product] = [], adress="", timeCreation=0):
         self.orderId = uuid.uuid1()
         self.client = client
         self.status = status
-        self.facility = facilty
+        self.facility = facility
         self.ProductList = ProductList
         self.timeCreation = timeCreation
         self.address = adress
@@ -53,6 +53,10 @@ class Order:
         print(f'ID: {self.orderId}')
         print(f'Кому: {self.client.name}')
         print(f'Статус заказа: {self.status.name}')
+        if(self.status == Status.INSTOCK):
+            print(f'Время готовки {self.count_product_time()}')
+        elif(self.status == Status.ONTHEWAY):
+            print(f'Время доставки {self.count_courier_time()}')
 
     # расчитать время готовки всех продуктов в минутах
     def count_product_time(self):
@@ -63,7 +67,7 @@ class Order:
     # расчитать время доставки продуктов курьером
     def count_courier_time(self, facility_position: tuple = (0, 0), client_position: tuple = (0, 0), courier_speed = 5):
         #Расстояние через евклидову метрику
-        distance = ((facility_position[0] - client_position[0]) ** 2) + ((facility_position[1] - client_position[1]) ** 2) ** 0.5
+        distance = ((self.facility.position[0] - self.client.position[0]) ** 2) + ((self.facility.position[1] - self.client.position[1]) ** 2) ** 0.5
         return (distance / courier_speed * 60)
 
     
